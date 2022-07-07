@@ -1,30 +1,22 @@
 #include "main.h"
 
 /**
- * more_numbers - X10 number printer.
- *
- * Description: Prints numbers with
- * int _putchar(int c) 10 times over.
- */
+ * more_numbers - prints numbers between 0 to 14
+ * 10 times.
+ * Return: no return.
+*/
 void more_numbers(void)
 {
-	int a;
-	int i = 1;
+	int i, ch;
 
-	while (i <= 10)
+	for (i = 0; i < 10; i++)
 	{
-		a = 0;
-
-		while (a <= 14)
+		for (ch = 0; ch < 15; ch++)
 		{
-			if (a > 9)
-
-				_putchar(((a / 10) % 10) + '0');
-
-			_putchar((a % 10) + '0');
-			a++;
+			if (ch >= 10)
+				_putchar((ch / 10) + 48);
+			_putchar((ch % 10) + 48);
 		}
 		_putchar('\n');
-		i++;
 	}
 }
