@@ -1,52 +1,44 @@
-#include "main.h"
-
-char *revstr(char *s);
+#include "holberton.h"
 
 /**
-  * is_palindrome - Checks that a string is a palindrome.
-  * @s: Pointer to String.
-  *
-  * Return: 1 if palindrome, 0 otherwise.
-  */
-int is_palindrome(char *s)
+ * _strlen_recursion - returns the length of a string.
+ * @s: string
+ * Return: the length of a string.
+ */
+int _strlen_recursion(char *s)
 {
-	char *ptr;
-	int i = 0;
-	int rtn;
-
-	ptr = revstr(s);
-
 	if (*s == '\0')
-		return (1);
-
-	if (*(s + i) == *(ptr + i))
-		return (1);
-
-	if (*(s + i) != *(ptr + i))
 		return (0);
-
-	rtn = is_palindrome(s + i);
-	i++;
-
-	return (rtn);
+	else
+		return (1 + _strlen_recursion(s + 1));
 }
 
 /**
-  * revstr - Reverses a string.
-  * @s: Pointer to string.
-  *
-  * Description: This function reverses the pointer to the last character
-  * of the string to faccilitate comparison using palindrome function.
-  * Return: Pointer to string.
-  */
-char *revstr(char *s)
+ * comparator - compares each character of the string.
+ * @s: string
+ * @n1: smallest iterator.
+ * @n2: biggest iterator.
+ * Return: .
+ */
+int comparator(char *s, int n1, int n2)
+{
+	if (*(s + n1) == *(s + n2))
+	{
+		if (n1 == n2 || n1 == n2 + 1)
+			return (1);
+		return (0 + comparator(s, n1 + 1, n2 - 1));
+	}
+	return (0);
+}
+
+/**
+ * is_palindrome - detects if a string is a palindrome.
+ * @s: string.
+ * Return: 1 if s is a palindrome, 0 if not.
+ */
+int is_palindrome(char *s)
 {
 	if (*s == '\0')
-		return (0);
-
-	s++;
-	revstr(s);
-	s--;
-
-	return (s);
+		return (1);
+	return (comparator(s, 0, _strlen_recursion(s) - 1));
 }
